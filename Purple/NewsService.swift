@@ -37,7 +37,7 @@ class NewsService: ObservableObject {
     @Published var newsStories: [NewsStory] = []
     
     func fetchNews() {
-        let apiKey = "bl4YEBDzPM0IiKknWleK8Yw50Di2IEsiEylPyD6Q"
+        let apiKey = ProcessInfo.processInfo.environment["NEWS_API_KEY"] ?? ""
         let urlString = "https://api.thenewsapi.com/v1/news/top?api_token=\(apiKey)&locale=us&limit=3&categories=politics"
         
         guard let url = URL(string: urlString) else {
