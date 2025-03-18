@@ -11,7 +11,7 @@ import SwiftUI
 struct PurpleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView() // ✅ Ensure this is your main entry point
         }
     }
 }

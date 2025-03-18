@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3502C1102D8951C7003C373C /* FontDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502C10F2D8951C7003C373C /* FontDebugger.swift */; };
+		35806C0A2D85063D005C43F3 /* OpenAITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35806C092D85063D005C43F3 /* OpenAITest.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		35806B152D7F6D6E005C43F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +29,49 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3502C10F2D8951C7003C373C /* FontDebugger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontDebugger.swift; sourceTree = "<group>"; };
 		35806B032D7F6D6D005C43F3 /* Purple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Purple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35806B142D7F6D6E005C43F3 /* PurpleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PurpleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35806B1E2D7F6D6E005C43F3 /* PurpleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PurpleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		35806C092D85063D005C43F3 /* OpenAITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAITest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3502C10A2D8941A7003C373C /* Exceptions for "Purple" folder in "Purple" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 35806B022D7F6D6D005C43F3 /* Purple */;
+		};
+		3502C10B2D8941A7003C373C /* Exceptions for "Purple" folder in "PurpleTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Inter-Italic.ttf",
+				"Inter-Light.ttf",
+				"Inter-Regular.ttf",
+			);
+			target = 35806B132D7F6D6E005C43F3 /* PurpleTests */;
+		};
+		3502C10C2D8941A7003C373C /* Exceptions for "Purple" folder in "PurpleUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Inter-Italic.ttf",
+				"Inter-Light.ttf",
+				"Inter-Regular.ttf",
+			);
+			target = 35806B1D2D7F6D6E005C43F3 /* PurpleUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		35806B052D7F6D6D005C43F3 /* Purple */ = {
+		3502C0F72D8941A7003C373C /* Purple */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3502C10A2D8941A7003C373C /* Exceptions for "Purple" folder in "Purple" target */,
+				3502C10B2D8941A7003C373C /* Exceptions for "Purple" folder in "PurpleTests" target */,
+				3502C10C2D8941A7003C373C /* Exceptions for "Purple" folder in "PurpleUITests" target */,
+			);
 			path = Purple;
 			sourceTree = "<group>";
 		};
@@ -75,10 +115,12 @@
 		35806AFA2D7F6D6D005C43F3 = {
 			isa = PBXGroup;
 			children = (
-				35806B052D7F6D6D005C43F3 /* Purple */,
+				3502C10F2D8951C7003C373C /* FontDebugger.swift */,
+				35806C092D85063D005C43F3 /* OpenAITest.swift */,
 				35806B172D7F6D6E005C43F3 /* PurpleTests */,
 				35806B212D7F6D6E005C43F3 /* PurpleUITests */,
 				35806B042D7F6D6D005C43F3 /* Products */,
+				3502C0F72D8941A7003C373C /* Purple */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,7 +150,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				35806B052D7F6D6D005C43F3 /* Purple */,
+				3502C0F72D8941A7003C373C /* Purple */,
 			);
 			name = Purple;
 			packageProductDependencies = (
@@ -236,6 +278,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3502C1102D8951C7003C373C /* FontDebugger.swift in Sources */,
+				35806C0A2D85063D005C43F3 /* OpenAITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +438,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Purple/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Purple/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -403,7 +449,6 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -431,6 +476,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Purple/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Purple/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -440,7 +487,6 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
