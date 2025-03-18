@@ -20,7 +20,7 @@ class AIService {
             completion(nil, nil, nil, nil) // ✅ Matches four parameters
             return
         }
-
+        
         let requestData: [String: Any] = [
             "model": "gpt-4-turbo",
             "messages": [
