@@ -72,10 +72,9 @@ struct HomeView: View {
     
     /// ✅ **Updated `newsCard` function with AI-generated headlines**
     private func newsCard(_ index: Int) -> some View {
-        @State var aiHeadline: String = aiHeadlinesCache[index] ?? newsService.newsStories[index].title // ✅ Default to cached AI title or original
-        
+        let aiHeadline = aiHeadlinesCache[index] ?? newsService.newsStories[index].title
+
         return ZStack {
-            // Background Image
             AsyncImage(url: URL(string: newsService.newsStories[index].image_url ?? "https://via.placeholder.com/300")) { image in
                 image.resizable()
                     .aspectRatio(contentMode: .fill)
@@ -85,18 +84,17 @@ struct HomeView: View {
                 Color.gray.opacity(0.3).frame(width: 120, height: 100)
             }
             .cornerRadius(10)
-            
-            // ✅ Add a dark overlay to improve readability
-            Color.black.opacity(0.5) // Dark tint
+
+            Color.black.opacity(0.5)
                 .frame(width: 120, height: 100)
                 .cornerRadius(10)
-            
-            // Headline Text
+
+            // ✅ Use the AI-generated short headline
             Text(aiHeadline)
                 .font(.system(size: 12, weight: .bold))
                 .foregroundColor(.white)
                 .padding(5)
-                .background(Color.black.opacity(0.7)) // Background behind text for even better contrast
+                .background(Color.black.opacity(0.7))
                 .cornerRadius(5)
         }
         .frame(width: 120)
@@ -105,13 +103,10 @@ struct HomeView: View {
             generateAIRewrite()
         }
         .onAppear {
-            if let cachedHeadline = aiHeadlinesCache[index] {
-                aiHeadline = cachedHeadline // ✅ Uses cached AI-generated headline
-            } else {
-                AIService.shared.rewriteHeadline(originalTitle: newsService.newsStories[index].title) { newHeadline in
+            if aiHeadlinesCache[index] == nil {
+                AIService.shared.rewriteArticle(originalText: newsService.newsStories[index].title) { shortHeadline, _, _, _ in
                     DispatchQueue.main.async {
-                        aiHeadlinesCache[index] = newHeadline // ✅ Cache AI headline
-                        aiHeadline = newHeadline // ✅ Update state immediately
+                        aiHeadlinesCache[index] = shortHeadline ?? newsService.newsStories[index].title
                     }
                 }
             }
@@ -138,16 +133,20 @@ struct HomeView: View {
         
         print("🚀 Calling OpenAI API now...")
         
-        AIService.shared.rewriteArticle(originalText: originalText) { neutralSummary, democraticView, republicanView in
+        AIService.shared.rewriteArticle(originalText: originalText) { shortHeadline, neutralSummary, democraticView, republicanView in
             DispatchQueue.main.async {
                 self.rewrittenArticle = neutralSummary ?? "No summary generated."
                 self.aiDemocraticView = democraticView ?? "No Democratic view generated."
                 self.aiRepublicanView = republicanView ?? "No Republican view generated."
-                
+
+                // ✅ Ensure the headline updates correctly
+                self.aiGeneratedHeadline = shortHeadline ?? "No headline generated."
+
+                print("✅ AI Short Headline: \(shortHeadline ?? "❌ No headline returned")")
                 print("✅ AI Neutral Summary: \(neutralSummary ?? "❌ No summary returned")")
                 print("✅ AI Democratic View: \(democraticView ?? "❌ No view returned")")
                 print("✅ AI Republican View: \(republicanView ?? "❌ No view returned")")
-                
+
                 print("🚀 OpenAI API Call Completed!")
             }
         }
@@ -197,7 +196,7 @@ struct HomeView: View {
     private func getCurrentSummary() -> String {
         switch selectedView {
         case .neutral:
-            return rewrittenArticle ?? "Generating..."
+            return rewrittenArticle ?? "Generating neutral summary..."
         case .democratic:
             return aiDemocraticView ?? "Generating Democratic Perspective..."
         case .republican:

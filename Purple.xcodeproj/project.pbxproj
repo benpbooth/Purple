@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3502C1102D8951C7003C373C /* FontDebugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3502C10F2D8951C7003C373C /* FontDebugger.swift */; };
-		35806C0A2D85063D005C43F3 /* OpenAITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35806C092D85063D005C43F3 /* OpenAITest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +32,6 @@
 		35806B032D7F6D6D005C43F3 /* Purple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Purple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35806B142D7F6D6E005C43F3 /* PurpleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PurpleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35806B1E2D7F6D6E005C43F3 /* PurpleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PurpleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		35806C092D85063D005C43F3 /* OpenAITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAITest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -116,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				3502C10F2D8951C7003C373C /* FontDebugger.swift */,
-				35806C092D85063D005C43F3 /* OpenAITest.swift */,
 				35806B172D7F6D6E005C43F3 /* PurpleTests */,
 				35806B212D7F6D6E005C43F3 /* PurpleUITests */,
 				35806B042D7F6D6D005C43F3 /* Products */,
@@ -279,7 +276,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3502C1102D8951C7003C373C /* FontDebugger.swift in Sources */,
-				35806C0A2D85063D005C43F3 /* OpenAITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
