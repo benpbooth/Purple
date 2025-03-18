@@ -121,33 +121,33 @@ struct HomeView: View {
     /// ✅ **Calls AI API to generate rewritten article + headline**
     private func generateAIRewrite() {
         print("🚀 generateAIRewrite() triggered")
-
+        
         guard newsService.newsStories.indices.contains(selectedIndex) else {
             print("❌ Invalid news index: \(selectedIndex)")
             return
         }
-
+        
         let originalText = newsService.newsStories[selectedIndex].description ?? "No description available."
         print("📰 News Story Found: \(originalText)")
-
+        
         // Clear previous AI-generated content
         rewrittenArticle = nil
         aiGeneratedHeadline = nil
         aiDemocraticView = nil
         aiRepublicanView = nil
-
+        
         print("🚀 Calling OpenAI API now...")
-
+        
         AIService.shared.rewriteArticle(originalText: originalText) { neutralSummary, democraticView, republicanView in
             DispatchQueue.main.async {
                 self.rewrittenArticle = neutralSummary ?? "No summary generated."
                 self.aiDemocraticView = democraticView ?? "No Democratic view generated."
                 self.aiRepublicanView = republicanView ?? "No Republican view generated."
-
+                
                 print("✅ AI Neutral Summary: \(neutralSummary ?? "❌ No summary returned")")
                 print("✅ AI Democratic View: \(democraticView ?? "❌ No view returned")")
                 print("✅ AI Republican View: \(republicanView ?? "❌ No view returned")")
-
+                
                 print("🚀 OpenAI API Call Completed!")
             }
         }
@@ -168,7 +168,7 @@ struct HomeView: View {
                 // ✅ Headline
                 Text(
                     (newsService.newsStories.indices.contains(selectedIndex) ?
-                    (aiHeadlinesCache[selectedIndex] ?? newsService.newsStories[selectedIndex].title) : "Loading...")
+                     (aiHeadlinesCache[selectedIndex] ?? newsService.newsStories[selectedIndex].title) : "Loading...")
                 )
                 .font(.title3)
                 .bold()
@@ -206,36 +206,51 @@ struct HomeView: View {
     }
     
     private var navigationArrows: some View {
-        HStack {
-            // ✅ Left Swipe → Democratic View
-            Button(action: { selectedView = .democratic }) {
-                Image(systemName: "arrow.left.circle.fill")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.blue) // ✅ Blue for Democratic
+        VStack {
+            HStack {
+                // 🔵 Left Button (Democratic View) - Donkey Icon
+                Button(action: {
+                    if selectedView == .neutral {
+                        selectedView = .democratic
+                    } else if selectedView == .republican {
+                        selectedView = .neutral
+                    }
+                }) {
+                    Image("Donkey")
+                        .resizable()
+                        .frame(width: 50, height: 40)
+                }
+
+                // 🟣 Scroll Indicator (Updated to support full navigation)
+                HStack(spacing: 12) {
+                    Circle()
+                        .fill(selectedView == .democratic ? Color.blue : Color.gray.opacity(0.3))
+                        .frame(width: 12, height: 12)
+
+                    Circle()
+                        .fill(selectedView == .neutral ? Color(red: 187/255, green: 149/255, blue: 189/255) : Color.gray.opacity(0.3))
+                        .frame(width: 12, height: 12)
+
+                    Circle()
+                        .fill(selectedView == .republican ? Color.red : Color.gray.opacity(0.3))
+                        .frame(width: 12, height: 12)
+                }
+
+                // 🔴 Right Button (Republican View) - Elephant Icon
+                Button(action: {
+                    if selectedView == .neutral {
+                        selectedView = .republican
+                    } else if selectedView == .democratic {
+                        selectedView = .neutral
+                    }
+                }) {
+                    Image("Elephant")
+                        .resizable()
+                        .frame(width: 50, height: 40)
+                }
             }
-            
-            Spacer()
-            
-            // ✅ Reset to Neutral View (Tap in Center)
-            Button(action: { selectedView = .neutral }) {
-                Image(systemName: "circle.fill")
-                    .resizable()
-                    .frame(width: 15, height: 15)
-                    .foregroundColor(.gray) // ✅ Neutral button
-            }
-            
-            Spacer()
-            
-            // ✅ Right Swipe → Republican View
-            Button(action: { selectedView = .republican }) {
-                Image(systemName: "arrow.right.circle.fill")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.red) // ✅ Red for Republican
-            }
+            .padding(.horizontal, 50)
+            .padding(.bottom, 20)
         }
-        .padding(.horizontal, 50)
-        .padding(.bottom, 20)
     }
 }
