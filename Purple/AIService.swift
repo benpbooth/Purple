@@ -25,7 +25,7 @@ class AIService {
             "model": "gpt-4-turbo",
             "messages": [
                 ["role": "system", "content": """
-                You are a professional news summarizer. Given a news article, generate:
+                You are a professional news summarizer. Given a news article, generate in no less than 3 paragraphs for each:
                 1️⃣ **HEADLINE:** (Short and engaging, **max 6 words**)
                 2️⃣ **NEUTRAL SUMMARY:** (3-6 paragraphs)
                 3️⃣ **DEMOCRATIC VIEW:** (2-4 paragraphs)
@@ -41,7 +41,7 @@ class AIService {
                 ["role": "user", "content": "Here is the news article: \(originalText)"]
             ],
             "temperature": 0.5,
-            "max_tokens": 1400
+            "max_tokens": 2500,
         ]
 
         sendOpenAIRequest(requestData: requestData) { responseText in

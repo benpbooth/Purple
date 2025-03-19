@@ -164,24 +164,49 @@ struct HomeView: View {
     private var selectedStoryView: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 8) {
-                // ✅ Headline
-                Text(
-                    (newsService.newsStories.indices.contains(selectedIndex) ?
-                     (aiHeadlinesCache[selectedIndex] ?? newsService.newsStories[selectedIndex].title) : "Loading...")
-                )
-                .font(.title3)
-                .bold()
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 20)
-                .foregroundColor(.black)
-                
-                // ✅ Show appropriate summary based on selectedView
+                // 📰 **Headline - Inter Regular**
+                if selectedIndex < aiHeadlinesCache.count {
+                    Text(aiHeadlinesCache[selectedIndex] ?? "No headline available") // ✅ Unwrapping optional
+                        .font(.custom("Inter-Regular", size: 20)) // Use Inter Regular for headlines
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
+                        .onAppear {
+                            let appliedFont = UIFont(name: "Inter-Regular", size: 20) ?? UIFont.systemFont(ofSize: 20)
+                            print("📢 Applied Headline Font: \(appliedFont.fontName)")
+                        }
+                } else if selectedIndex < newsService.newsStories.count {
+                    Text(newsService.newsStories[selectedIndex].title)
+                        .font(.custom("Inter-Regular", size: 20)) // Use Inter Regular for headlines
+                        .bold()
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
+                        .onAppear {
+                            let appliedFont = UIFont(name: "Inter-Regular", size: 20) ?? UIFont.systemFont(ofSize: 20)
+                            print("📢 Applied Headline Font: \(appliedFont.fontName)")
+                        }
+                } else {
+                    Text("No story available") // ✅ Fallback if no headlines exist
+                        .font(.custom("Inter-Regular", size: 20))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 20)
+                        .onAppear {
+                            let appliedFont = UIFont(name: "Inter-Regular", size: 20) ?? UIFont.systemFont(ofSize: 20)
+                            print("📢 Applied Headline Font: \(appliedFont.fontName)")
+                        }
+                }
+
+                // 📖 **Body Text - Inter Light**
                 Text(getCurrentSummary())
-                    .font(.body)
+                    .font(.custom("InterVariable-Light", size: 18)) // Use Inter Light for body text
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal, 20)
-                
-                // ✅ Show loading indicator if needed
+                    .onAppear {
+                        let appliedFont = UIFont(name: "InterVariable-Light", size: 18) ?? UIFont.systemFont(ofSize: 20)
+                        print("📢 Applied Body Font: \(appliedFont.fontName)")
+                    }
+
+                // 🔄 **Loading Indicator**
                 if getCurrentSummary() == "Generating..." {
                     ProgressView("Generating AI Summary...").padding(.top, 10)
                 }
